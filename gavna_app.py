@@ -388,8 +388,8 @@ def generate_stock_graph_squish(selected_symbol, _):
 
 
 
-if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False)
+# if __name__ == '__main__':
+#     app.run_server(debug=True, use_reloader=False)
 
 
 
