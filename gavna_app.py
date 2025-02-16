@@ -7,7 +7,7 @@ from plotly import graph_objects
 import yfinance
 import numpy as np
 
-app = dash(_name_)
+app = dash(__name__)
 server = app.server
 
 TIME_DELTA = 260# 140last T hours of data are looked into as per insert time
