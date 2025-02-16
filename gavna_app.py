@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 import dash
 import pandas as pd
-from dash import dcc, html, Dash
+from dash import dcc, html
 from dash.dependencies import Input, Output
 from plotly import graph_objects
 import yfinance
 import numpy as np
 
-app = Dash(__name__)
+
 server = app.server
 
 TIME_DELTA = 260# 140last T hours of data are looked into as per insert time
