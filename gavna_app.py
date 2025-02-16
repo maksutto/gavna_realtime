@@ -8,7 +8,7 @@ import yfinance
 import numpy as np
 
 
-server = app.server
+
 
 TIME_DELTA = 260# 140last T hours of data are looked into as per insert time
 
@@ -92,7 +92,7 @@ app = dash.Dash(
     assets_folder="../assets",
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
-
+server = app.server
 app.layout = html.Div(
     [
         html.Div(
