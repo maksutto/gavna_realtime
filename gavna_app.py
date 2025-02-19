@@ -77,7 +77,7 @@ def get_stock_data(start: datetime, stock_symbol: str):
 
     tick = Ticker(stock_symbol)
     hist = tick.history(start=start, interval = "5m")
-    hist = hist.rename(columns={"close": "Close"})
+    hist = hist.rename(columns={"close": "Close","open": "Open","high": "High", "low": "Low"})
     hist = hist.droplevel(0)
     # tick = yfinance.Ticker(stock_symbol)
     # return tick.history(start=start,interval = "5m")
