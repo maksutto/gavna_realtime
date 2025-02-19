@@ -81,7 +81,7 @@ def get_stock_data(start: datetime, stock_symbol: str):
     hist = hist.droplevel(0)
     # tick = yfinance.Ticker(stock_symbol)
     # return tick.history(start=start,interval = "5m")
-    return tick.history(start=start,interval = "5m")
+    return hist
 
 def get_stock_data_vix(start: datetime):
     def format_date(dt: datetime) -> str:
