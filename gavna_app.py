@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 from plotly import graph_objects
 import yfinance
 import numpy as np
-
+from yahooquery import Ticker
 
 
 
@@ -74,7 +74,13 @@ def get_stock_data(start: datetime, stock_symbol: str):
     query = f"SELECT * FROM quotes WHERE ts BETWEEN '{format_date(start)}' AND "
     if stock_symbol:
         query += f" AND stock_symbol = '{stock_symbol}' "
-    tick = yfinance.Ticker(stock_symbol)
+
+    tick = Ticker(stock_symbol)
+    hist = tick.history(start=start, interval = "5m")
+    hist = hist.rename(columns={"close": "Close"})
+    hist = hist.droplevel(0)
+    # tick = yfinance.Ticker(stock_symbol)
+    # return tick.history(start=start,interval = "5m")
     return tick.history(start=start,interval = "5m")
 
 def get_stock_data_vix(start: datetime):
