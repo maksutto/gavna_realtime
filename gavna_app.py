@@ -86,8 +86,15 @@ def get_stock_data(start: datetime, stock_symbol: str):
 def get_stock_data_vix(start: datetime):
     def format_date(dt: datetime) -> str:
         return dt.isoformat(timespec="microseconds") + "Z"
-    tick = yfinance.Ticker('^VIX')
-    return tick.history(start=start,interval = "5m")
+
+    tick = Ticker('^VIX')
+    hist = tick.history(start=start, interval = "5m")
+    hist = hist.rename(columns={"close": "Close","open": "Open","high": "High", "low": "Low"})
+    hist = hist.droplevel(0)
+    
+    # tick = yfinance.Ticker('^VIX')
+    # return tick.history(start=start,interval = "5m")
+    return hist
     
 # df = get_stock_data(now() - timedelta(hours=TIME_DELTA), "^SPX")
 
