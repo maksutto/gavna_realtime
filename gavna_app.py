@@ -48,6 +48,7 @@ def boundaryes():
     test_14dte['date'] = pd.to_datetime(test_14dte['date'], format='mixed')#'%Y-%m-%d %H-%M'
     test_14dte['date'] = test_14dte['date'].apply(lambda x: x -timedelta(hours=8))
     test_14dte.index = test_14dte['date']
+
     
     gamma['date'] = pd.to_datetime(gamma['date'], format='mixed')#'%Y-%m-%d %H-%M'
     gamma['date'] = gamma['date'].apply(lambda x: x -timedelta(hours=8))
@@ -63,7 +64,7 @@ def boundaryes():
 
     full_df = pd.concat([test_7dte ['zero'], test_7dte ['maxVanna'], gamma['low'], gamma['zero'], gamma_7dte['low'], gamma_7dte['zero'], gamma_14dte['low'], gamma_14dte['zero'], test_14dte['zero'], test_14dte['maxVanna'], test_14dte ['minVanna'],test_14dte['puts'],test_14dte['calls']],
                         axis=1,keys = ['test_7dte_zero','test_7dte_maxVanna','gamma_low','gamma_zero','gamma_7dte_low','gamma_7dte_zero','gamma_14dte_low','gamma_14dte_zero','test_14dte_zero','test_14dte_maxVanna','test_14dte_minVanna','test_14dte_puts','test_14dte_calls'])
-    full_df = full_df[full_df.index >= '2025-01-26']
+    full_df = full_df[full_df.index  >= now()]
     return full_df.ffill().bfill()
 
 def boundaryes_vix():
@@ -192,7 +193,7 @@ app.layout = html.Div(
 def generate_stock_graph(selected_symbol, _):
     data = []
     data_boundary = boundaryes()
-    filtered_df = get_stock_data(now() - timedelta(hours=TIME_DELTA), selected_symbol)
+    filtered_df = get_stock_data(now(), selected_symbol)
     data_frame = filtered_df
     
     
@@ -321,7 +322,7 @@ def generate_stock_graph(selected_symbol, _):
 def generate_stock_graph_percentage(selected_symbol, _):
     data = []
     data_boundary = boundaryes_vix()
-    filtered_df = get_stock_data_vix(now() - timedelta(hours=TIME_DELTA))
+    filtered_df = get_stock_data_vix(now())
     data_frame = filtered_df
 
     trace1 = graph_objects.Candlestick(x=data_frame.index,
