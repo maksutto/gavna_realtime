@@ -215,7 +215,7 @@ def generate_stock_graph(selected_symbol, _):
                  x=data_boundary.index,
                  y=data_boundary['gamma_7dte_low'].rolling(3, min_periods=1).mean().ffill(),
                  line=dict(color='#3489eb'),
-                 name="maxVanna",line_width=2,yaxis='y1')
+                 name="maxVanna",line_width=1,yaxis='y1')
     data.append(trace3)
 
     trace4 = graph_objects.Scatter(
