@@ -40,24 +40,24 @@ def boundaryes():
     gamma_14dte = pd.read_csv("https://www.dropbox.com/scl/fi/67nf4lsn76zu23qqtfi6k/gamma_range_summ_result_test_14dte.csv?rlkey=cw7y7j87ys5v5uckzaoi16em7&dl=1",index_col=0)
     
     test['date'] = pd.to_datetime(test['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    test['date'] = test['date'].apply(lambda x: x -timedelta(hours=8))
+    test['date'] = test['date'].apply(lambda x: x -timedelta(hours=7))
     test.index = test['date']
     test_7dte['date'] = pd.to_datetime(test_7dte['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    test_7dte['date'] = test_7dte['date'].apply(lambda x: x -timedelta(hours=8))
+    test_7dte['date'] = test_7dte['date'].apply(lambda x: x -timedelta(hours=7))
     test_7dte.index = test_7dte['date']
     test_14dte['date'] = pd.to_datetime(test_14dte['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    test_14dte['date'] = test_14dte['date'].apply(lambda x: x -timedelta(hours=8))
+    test_14dte['date'] = test_14dte['date'].apply(lambda x: x -timedelta(hours=7))
     test_14dte.index = test_14dte['date']
 
     
     gamma['date'] = pd.to_datetime(gamma['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    gamma['date'] = gamma['date'].apply(lambda x: x -timedelta(hours=8))
+    gamma['date'] = gamma['date'].apply(lambda x: x -timedelta(hours=7))
     gamma.index = gamma['date']
     gamma_7dte['date'] = pd.to_datetime(gamma_7dte['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    gamma_7dte['date'] = gamma_7dte['date'].apply(lambda x: x -timedelta(hours=8))
+    gamma_7dte['date'] = gamma_7dte['date'].apply(lambda x: x -timedelta(hours=7))
     gamma_7dte.index = gamma_7dte['date']
     gamma_14dte['date'] = pd.to_datetime(gamma_14dte['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    gamma_14dte['date'] = gamma_14dte['date'].apply(lambda x: x -timedelta(hours=8))
+    gamma_14dte['date'] = gamma_14dte['date'].apply(lambda x: x -timedelta(hours=7))
     gamma_14dte.index = gamma_14dte['date']
     
     
