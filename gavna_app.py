@@ -288,7 +288,7 @@ def generate_stock_graph(selected_symbol, _):
 
     trace13 = graph_objects.Bar(
                  x = data_boundary.index,
-                 y = ((data_boundary['test_14dte_puts'] + data_boundary['test_14dte_calls'])/(data_boundary['test_14dte_puts'].abs() + data_boundary['test_14dte_calls'].abs()))-1,
+                 y = ((data_boundary['test_14dte_puts'] + data_boundary['test_14dte_calls'])/(data_boundary['test_14dte_puts'].abs() + data_boundary['test_14dte_calls'].abs())),
                  name="minVanna",opacity = 0.8,yaxis='y2')
     data.append(trace13)
 
