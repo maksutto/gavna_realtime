@@ -306,6 +306,8 @@ def generate_stock_graph(selected_symbol, _):
 
     figure = graph_objects.Figure(data=data, layout=layout)
     figure.update_yaxes(gridwidth=0.1)
+    figure.update_layout({"barmode":"stack"},bargroupgap = 0,bargap=0)
+    figure.update_layout(height=2300, width=2900)
     figure.update_xaxes(rangebreaks=[
             dict(bounds=["sat", "mon"]),
             dict(bounds=[16, 7.5], pattern="hour"),
