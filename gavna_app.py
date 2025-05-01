@@ -67,14 +67,14 @@ def boundaryes():
     full_df = full_df[full_df.index  >= now()]
     return full_df.ffill().bfill()
 
-def boundaryes_vix():
-    test = pd.read_csv("https://www.dropbox.com/scl/fi/wn5fikd5anjqmwnz2uch6/vanna_range_summ_result_test_7dte_VIX.csv?rlkey=toi3x3p6wln53byb0akj7zmae&dl=1",index_col=0) # 
-    test['date'] = pd.to_datetime(test['date'], format='mixed')#'%Y-%m-%d %H-%M'
-    test['date'] = test['date'].apply(lambda x: x -timedelta(hours=9))
-    test.index = test['date']
+# def boundaryes_vix():
+#     test = pd.read_csv("https://www.dropbox.com/scl/fi/wn5fikd5anjqmwnz2uch6/vanna_range_summ_result_test_7dte_VIX.csv?rlkey=toi3x3p6wln53byb0akj7zmae&dl=1",index_col=0) # 
+#     test['date'] = pd.to_datetime(test['date'], format='mixed')#'%Y-%m-%d %H-%M'
+#     test['date'] = test['date'].apply(lambda x: x -timedelta(hours=9))
+#     test.index = test['date']
 
-    test = test[test.index >= '2025-01-26']
-    return test.ffill().bfill()
+#     test = test[test.index >= '2025-01-26']
+#     return test.ffill().bfill()
 
 
 
@@ -94,18 +94,18 @@ def get_stock_data(start: datetime, stock_symbol: str):
     # return tick.history(start=start,interval = "5m")
     return hist
 
-def get_stock_data_vix(start: datetime):
-    def format_date(dt: datetime) -> str:
-        return dt.isoformat(timespec="microseconds") + "Z"
+# def get_stock_data_vix(start: datetime):
+#     def format_date(dt: datetime) -> str:
+#         return dt.isoformat(timespec="microseconds") + "Z"
 
-    tick = Ticker('^VIX')
-    hist = tick.history(start=start, interval = "5m")
-    hist = hist.rename(columns={"close": "Close","open": "Open","high": "High", "low": "Low"})
-    hist = hist.droplevel(0)
+#     tick = Ticker('^VIX')
+#     hist = tick.history(start=start, interval = "5m")
+#     hist = hist.rename(columns={"close": "Close","open": "Open","high": "High", "low": "Low"})
+#     hist = hist.droplevel(0)
     
-    # tick = yfinance.Ticker('^VIX')
-    # return tick.history(start=start,interval = "5m")
-    return hist
+#     # tick = yfinance.Ticker('^VIX')
+#     # return tick.history(start=start,interval = "5m")
+#     return hist
     
 # df = get_stock_data(now() - timedelta(hours=TIME_DELTA), "^SPX")
 
@@ -321,85 +321,85 @@ def generate_stock_graph(selected_symbol, _):
 @app.callback(Output("stock-graph-percent-change", "figure"),[Input("stock-symbol", "value"),Input("stock-graph-update", "n_intervals"),],)
 
 
-def generate_stock_graph_percentage(selected_symbol, _):
-    data = []
-    data_boundary = boundaryes_vix()
-    filtered_df = get_stock_data_vix(now())
-    data_frame = filtered_df
+# def generate_stock_graph_percentage(selected_symbol, _):
+#     data = []
+#     data_boundary = boundaryes_vix()
+#     filtered_df = get_stock_data_vix(now())
+#     data_frame = filtered_df
 
-    trace1 = graph_objects.Candlestick(x=data_frame.index,
-                open=data_frame['Open'],
-                high=data_frame['High'],
-                low=data_frame['Low'],
-                close=data_frame['Close'],yaxis='y1')
-    data.append(trace1)
+#     trace1 = graph_objects.Candlestick(x=data_frame.index,
+#                 open=data_frame['Open'],
+#                 high=data_frame['High'],
+#                 low=data_frame['Low'],
+#                 close=data_frame['Close'],yaxis='y1')
+#     data.append(trace1)
     
-    trace1 = graph_objects.Scatter(
-        x = data_boundary.index,
-        y = data_boundary['maxVanna'],
-        marker=dict(color=COLORS[len(data)]),
-        name="group2",line_width=3,yaxis='y1'
-        )
-    data.append(trace1)
+#     trace1 = graph_objects.Scatter(
+#         x = data_boundary.index,
+#         y = data_boundary['maxVanna'],
+#         marker=dict(color=COLORS[len(data)]),
+#         name="group2",line_width=3,yaxis='y1'
+#         )
+#     data.append(trace1)
 
-    trace2 = graph_objects.Scatter(
-        x = data_boundary.index,
-        y = data_boundary['zero'],
-        marker=dict(color=COLORS[len(data)]),
-        name="group2",line_width=3,yaxis='y1'
-        )
-    data.append(trace2)
+#     trace2 = graph_objects.Scatter(
+#         x = data_boundary.index,
+#         y = data_boundary['zero'],
+#         marker=dict(color=COLORS[len(data)]),
+#         name="group2",line_width=3,yaxis='y1'
+#         )
+#     data.append(trace2)
 
-    trace3 = graph_objects.Scatter(
-        x = data_boundary.index,
-        y = data_boundary['minVanna'],
-        marker=dict(color=COLORS[len(data)]),
-        name="group2",line_width=3,yaxis='y1'
-        )
-    data.append(trace3)
+#     trace3 = graph_objects.Scatter(
+#         x = data_boundary.index,
+#         y = data_boundary['minVanna'],
+#         marker=dict(color=COLORS[len(data)]),
+#         name="group2",line_width=3,yaxis='y1'
+#         )
+#     data.append(trace3)
 
-    trace4 = graph_objects.Scatter(
-        x = data_boundary.index,
-        y = data_boundary['low'],
-        marker=dict(color=COLORS[len(data)]),
-        name="group2",line_width=3,yaxis='y1'
-        )
-    data.append(trace4)
+#     trace4 = graph_objects.Scatter(
+#         x = data_boundary.index,
+#         y = data_boundary['low'],
+#         marker=dict(color=COLORS[len(data)]),
+#         name="group2",line_width=3,yaxis='y1'
+#         )
+#     data.append(trace4)
 
-    trace5 = graph_objects.Bar(
-        x = data_boundary.index,
-        y = ((data_boundary['puts'] - data_boundary['calls'])/(data_boundary['puts'].abs() + data_boundary['calls'].abs()))+1,
-        marker=dict(color=COLORS[len(data)]),
-        name="group2",opacity = 0.4,yaxis='y2'
-        )
-    data.append(trace5)
-
-    
-
-
-
-    layout = graph_objects.Layout(height=900, width=1900,xaxis_rangeslider_visible=False,
-        xaxis={"title": "Time"},
-        yaxis={"title": "Price"},
-        yaxis2=dict(title='Moddel Difference',overlaying='y',side='right'),
-        margin={"l": 70, "b": 70, "t": 70, "r": 70},
-        hovermode="closest",
-        plot_bgcolor="white",
-        paper_bgcolor="white",
-        font={"color": "#aaa"},showlegend=False
-        )
-
+#     trace5 = graph_objects.Bar(
+#         x = data_boundary.index,
+#         y = ((data_boundary['puts'] - data_boundary['calls'])/(data_boundary['puts'].abs() + data_boundary['calls'].abs()))+1,
+#         marker=dict(color=COLORS[len(data)]),
+#         name="group2",opacity = 0.4,yaxis='y2'
+#         )
+#     data.append(trace5)
 
     
-    figure = graph_objects.Figure(data=data, layout=layout)
-    figure.update_yaxes(gridwidth=0.1)
-    figure.update_xaxes(rangebreaks=[
-            dict(bounds=["sat", "mon"]),
-            dict(bounds=[16, 7.5], pattern="hour"),
-        ],showgrid=False,gridwidth=0.3
-        )
+
+
+
+#     layout = graph_objects.Layout(height=900, width=1900,xaxis_rangeslider_visible=False,
+#         xaxis={"title": "Time"},
+#         yaxis={"title": "Price"},
+#         yaxis2=dict(title='Moddel Difference',overlaying='y',side='right'),
+#         margin={"l": 70, "b": 70, "t": 70, "r": 70},
+#         hovermode="closest",
+#         plot_bgcolor="white",
+#         paper_bgcolor="white",
+#         font={"color": "#aaa"},showlegend=False
+#         )
+
+
+    
+#     figure = graph_objects.Figure(data=data, layout=layout)
+#     figure.update_yaxes(gridwidth=0.1)
+#     figure.update_xaxes(rangebreaks=[
+#             dict(bounds=["sat", "mon"]),
+#             dict(bounds=[16, 7.5], pattern="hour"),
+#         ],showgrid=False,gridwidth=0.3
+#         )
  
-    return figure
+#     return figure
     
 @app.callback(Output("squish-change", "figure"),[Input("stock-symbol", "value"),Input("stock-graph-update", "n_intervals")])
 def generate_stock_graph_squish(selected_symbol, _):
